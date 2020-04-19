@@ -1,9 +1,10 @@
 package com.pluralsight.kotlin.notekeeper
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.pluralsight.kotlin.notekeeper.model.CourseInfo
 import com.pluralsight.kotlin.notekeeper.model.DataManager
 import kotlinx.android.synthetic.main.activity_edit_note.*
 
@@ -13,7 +14,7 @@ class EditNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
 
-        val adapterCourses = ArrayAdapter<CourseInfo>(
+        val adapterCourses = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
             DataManager.courses.values.toList()
@@ -32,5 +33,39 @@ class EditNoteActivity : AppCompatActivity() {
         textNoteText.setText(note.text)
         textNoteTitle.setText(note.title)
         spinnerCourses.setSelection(DataManager.courses.values.indexOf(note.course))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_next -> {
+                moveNext()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun moveNext() {
+        ++notePosition
+        displayNote()
+        invalidateOptionsMenu()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (notePosition >= DataManager.notes.lastIndex) {
+            val menuItem = menu?.findItem(R.id.action_next)
+            if (menuItem != null) {
+                menuItem.icon = getDrawable(R.drawable.ic_last_page)
+                menuItem.isEnabled = false
+            }
+
+        }
+        return super.onPrepareOptionsMenu(menu)
+
     }
 }

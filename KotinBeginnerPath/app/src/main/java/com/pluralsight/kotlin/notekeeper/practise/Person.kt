@@ -35,5 +35,11 @@ class Person(val name: String, var weightLbs: Double) {
     }
 
     fun calcGoalWeightLbs(lbsToLoose: Double = 10.0) = weightLbs - lbsToLoose
+
+    fun nullSafety(p: Person?) {
+        val name = p?.name
+        var test: String = name ?: "NA"
+        test = p?.name ?: "NA"
+    }
 }
 

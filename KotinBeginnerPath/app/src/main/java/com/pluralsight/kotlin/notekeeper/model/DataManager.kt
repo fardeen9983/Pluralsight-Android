@@ -22,12 +22,12 @@ object DataManager {
 
     private fun initializeNotes(){
         val courses = courses.values.toList()
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
-        notes.add(NoteInfo(courses[0],"Intents", " Learn Intent"))
+        notes.add(NoteInfo(courses[0],"First", " Learn Intent"))
+        notes.add(NoteInfo(courses[1],"Second", " Learn Intent"))
+        notes.add(NoteInfo(courses[2],"Third", " Learn Intent"))
+        notes.add(NoteInfo(courses[0],"Fourth", " Learn Intent"))
+        notes.add(NoteInfo(courses[1],"Fifth", " Learn Intent"))
+        notes.add(NoteInfo(courses[2],"Sixth", " Learn Intent"))
+        notes.add(NoteInfo(courses[0],"Seventh", " Learn Intent"))
     }
 }
