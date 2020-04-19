@@ -25,7 +25,12 @@ class EditNoteActivity : AppCompatActivity() {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCourses.adapter = adapterCourses
 
-        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOT_SET)
+        notePosition =
+            savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOT_SET)
+                ?: intent.getIntExtra(
+                    NOTE_POSITION,
+                    POSITION_NOT_SET
+                )
         if (notePosition != POSITION_NOT_SET)
             displayNote()
     }
@@ -87,4 +92,11 @@ class EditNoteActivity : AppCompatActivity() {
         else DataManager.notes[notePosition] = note
 
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(NOTE_POSITION, notePosition)
+    }
+
 }
+
