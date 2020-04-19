@@ -13,9 +13,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listNotes.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,DataManager.notes)
+        listNotes.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, DataManager.notes)
         fab.setOnClickListener {
             startActivity(Intent(this, EditNoteActivity::class.java))
+        }
+
+        listNotes.setOnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this, EditNoteActivity::class.java)
+            intent.putExtra(EXTRA_NOTE_POSITION, position)
+            startActivity(intent)
         }
     }
 }
