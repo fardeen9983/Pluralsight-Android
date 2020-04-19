@@ -1,8 +1,9 @@
 package com.pluralsight.kotlin.notekeeper
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import com.pluralsight.kotlin.notekeeper.model.CourseInfo
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,13 +12,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fab.setOnClickListener {
-            val originalValue : Int = textDisplayedValue.text.toString().toInt()
-            val newValue = originalValue*2
-            textDisplayedValue.text = newValue.toString()
-            Snackbar.make(it,"Value $originalValue changed to $newValue",Snackbar.LENGTH_LONG).show()
-        }
-
+        val dm = DataManager()
+        val adapterCourses = ArrayAdapter<CourseInfo>(
+            this,
+            android.R.layout.simple_spinner_item,
+            dm.courses.values.toList()
+        )
+        adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCourses.adapter = adapterCourses
 
     }
 }
