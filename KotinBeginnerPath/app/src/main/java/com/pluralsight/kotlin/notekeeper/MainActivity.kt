@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.pluralsight.kotlin.notekeeper.model.DataManager
+import com.pluralsight.kotlin.notekeeper.model.NoteInfo
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,5 +25,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_NOTE_POSITION, position)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (listNotes.adapter as ArrayAdapter<*>).notifyDataSetChanged()
     }
 }
